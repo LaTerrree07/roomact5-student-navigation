@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
 
@@ -81,10 +83,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const deepTeal = Color(0xFF0F766E);
-    const softMint = Color(0xFFCCFBF1);
-    const darkCharcoal = Color(0xFF1F2937);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -92,7 +90,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
-        backgroundColor: deepTeal,
+        backgroundColor: AppColors.primaryMaroon,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -108,13 +106,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     width: 64,
                     height: 64,
                     decoration: const BoxDecoration(
-                      color: softMint,
+                      color: AppColors.softBlush,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.calculate,
                       size: 36,
-                      color: deepTeal,
+                      color: AppColors.primaryMaroon,
                     ),
                   ),
                 ),
@@ -126,7 +124,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 1.2,
-                    color: darkCharcoal,
+                    color: AppColors.darkCharcoal,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -137,15 +135,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     signed: true,
                   ),
                   style: const TextStyle(
-                    color: darkCharcoal,
+                    color: AppColors.darkCharcoal,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
                     labelText: 'First Number',
-                    labelStyle: const TextStyle(color: Color(0xFF4B5563)),
+                    labelStyle: const TextStyle(color: AppColors.mutedSlate),
                     hintText: 'Enter the first number',
                     hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
-                    prefixIcon: const Icon(Icons.looks_one, color: deepTeal),
+                    prefixIcon: const Icon(
+                      Icons.looks_one,
+                      color: AppColors.primaryMaroon,
+                    ),
                     filled: true,
                     fillColor: Colors.white,
                     contentPadding: const EdgeInsets.symmetric(
@@ -154,11 +155,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                      borderSide: const BorderSide(
+                        color: AppColors.borderSubtle,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: deepTeal, width: 2),
+                      borderSide: const BorderSide(
+                        color: AppColors.primaryMaroon,
+                        width: 2,
+                      ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -173,15 +179,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     signed: true,
                   ),
                   style: const TextStyle(
-                    color: darkCharcoal,
+                    color: AppColors.darkCharcoal,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
                     labelText: 'Second Number',
-                    labelStyle: const TextStyle(color: Color(0xFF4B5563)),
+                    labelStyle: const TextStyle(color: AppColors.mutedSlate),
                     hintText: 'Enter the second number',
                     hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
-                    prefixIcon: const Icon(Icons.looks_two, color: deepTeal),
+                    prefixIcon: const Icon(
+                      Icons.looks_two,
+                      color: AppColors.primaryMaroon,
+                    ),
                     filled: true,
                     fillColor: Colors.white,
                     contentPadding: const EdgeInsets.symmetric(
@@ -190,11 +199,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                      borderSide: const BorderSide(
+                        color: AppColors.borderSubtle,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: deepTeal, width: 2),
+                      borderSide: const BorderSide(
+                        color: AppColors.primaryMaroon,
+                        width: 2,
+                      ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -208,7 +222,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       child: ElevatedButton(
                         onPressed: () => calculate('+'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: deepTeal,
+                          backgroundColor: AppColors.primaryMaroon,
                           foregroundColor: Colors.white,
                           elevation: 1,
                           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -230,7 +244,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       child: ElevatedButton(
                         onPressed: () => calculate('-'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: deepTeal,
+                          backgroundColor: AppColors.primaryMaroon,
                           foregroundColor: Colors.white,
                           elevation: 1,
                           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -252,7 +266,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       child: ElevatedButton(
                         onPressed: () => calculate('×'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: deepTeal,
+                          backgroundColor: AppColors.primaryMaroon,
                           foregroundColor: Colors.white,
                           elevation: 1,
                           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -274,7 +288,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       child: ElevatedButton(
                         onPressed: () => calculate('÷'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: deepTeal,
+                          backgroundColor: AppColors.primaryMaroon,
                           foregroundColor: Colors.white,
                           elevation: 1,
                           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -301,10 +315,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     vertical: 20,
                   ),
                   decoration: BoxDecoration(
-                    color: softMint,
+                    color: AppColors.softBlush,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: const Color(0xFF99F6E4),
+                      color: AppColors.softBlushBorder,
                       width: 1.5,
                     ),
                   ),
@@ -316,7 +330,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: deepTeal,
+                          color: AppColors.primaryMaroon,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -326,7 +340,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1.5,
-                          color: Color(0xFF4B5563),
+                          color: Color(0xFF6E646A),
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -338,7 +352,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                         ),
                       ),
@@ -354,8 +368,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: deepTeal,
-                    side: const BorderSide(color: deepTeal, width: 1.5),
+                    foregroundColor: AppColors.primaryMaroon,
+                    side: const BorderSide(
+                      color: AppColors.primaryMaroon,
+                      width: 1.5,
+                    ),
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
@@ -370,7 +387,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   style: TextStyle(
                     fontSize: 13,
                     height: 1.5,
-                    color: Color(0xFF64748B),
+                    color: AppColors.mutedSlate,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

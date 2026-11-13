@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
 import 'demo_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -36,10 +37,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const deepTeal = Color(0xFF0F766E);
-    const softMint = Color(0xFFCCFBF1);
-    const mutedSlate = Color(0xFF64748B);
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -62,9 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               constraints: const BoxConstraints(maxWidth: 440),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardWhite,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.04),
@@ -84,13 +81,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           width: 72,
                           height: 72,
                           decoration: const BoxDecoration(
-                            color: softMint,
+                            color: AppColors.softBlush,
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
                             Icons.person_add,
                             size: 40,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                         ),
                       ),
@@ -101,24 +98,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: deepTeal,
+                          color: AppColors.primaryMaroon,
                         ),
                       ),
                       const SizedBox(height: 6),
                       const Text(
                         'Enter your details to create a session account.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14, color: mutedSlate),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.mutedSlate,
+                        ),
                       ),
                       const SizedBox(height: 24),
                       TextFormField(
                         controller: usernameController,
+                        style: const TextStyle(color: AppColors.darkCharcoal),
                         decoration: InputDecoration(
                           labelText: 'Username',
                           hintText: 'Choose a username (min 3 chars)',
                           prefixIcon: const Icon(
                             Icons.person_outline,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -126,18 +127,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color(0xFFCBD5E1),
+                              color: AppColors.borderSubtle,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: deepTeal,
+                              color: AppColors.primaryMaroon,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF8FAFC),
+                          fillColor: AppColors.warmWhite,
                         ),
                         validator: (value) {
                           final username = value?.trim() ?? '';
@@ -154,12 +155,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
+                        style: const TextStyle(color: AppColors.darkCharcoal),
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter password (min 6 chars)',
                           prefixIcon: const Icon(
                             Icons.lock_outline,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -167,18 +169,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color(0xFFCBD5E1),
+                              color: AppColors.borderSubtle,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: deepTeal,
+                              color: AppColors.primaryMaroon,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF8FAFC),
+                          fillColor: AppColors.warmWhite,
                         ),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -194,12 +196,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         controller: confirmController,
                         obscureText: true,
+                        style: const TextStyle(color: AppColors.darkCharcoal),
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
                           hintText: 'Re-enter your password',
                           prefixIcon: const Icon(
                             Icons.lock_reset,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -207,18 +210,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color(0xFFCBD5E1),
+                              color: AppColors.borderSubtle,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: deepTeal,
+                              color: AppColors.primaryMaroon,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF8FAFC),
+                          fillColor: AppColors.warmWhite,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -237,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: ElevatedButton(
                           onPressed: register,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: deepTeal,
+                            backgroundColor: AppColors.primaryMaroon,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -261,7 +264,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             style: TextButton.styleFrom(
-                              foregroundColor: deepTeal,
+                              foregroundColor: AppColors.primaryMaroon,
                             ),
                             child: const Text(
                               'Already have an account? Login',
@@ -271,13 +274,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       ),
                       const SizedBox(height: 18),
-                      const Divider(height: 1, color: Color(0xFFE2E8F0)),
+                      const Divider(height: 1, color: AppColors.borderLight),
                       const SizedBox(height: 14),
                       const Text(
                         'Earth Justin Lim · CCE106L (3447)',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: mutedSlate,
+                          color: AppColors.mutedSlate,
                           fontSize: 12.5,
                           fontWeight: FontWeight.w500,
                         ),

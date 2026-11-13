@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const deepTeal = Color(0xFF0F766E);
-    const softMint = Color(0xFFCCFBF1);
-    const darkCharcoal = Color(0xFF1F2937);
-    const mutedSlate = Color(0xFF64748B);
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -30,9 +27,9 @@ class HomePage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(24.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardWhite,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.04),
@@ -50,13 +47,13 @@ class HomePage extends StatelessWidget {
                         width: 72,
                         height: 72,
                         decoration: const BoxDecoration(
-                          color: softMint,
+                          color: AppColors.softBlush,
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
                           Icons.home,
                           size: 42,
-                          color: deepTeal,
+                          color: AppColors.primaryMaroon,
                         ),
                       ),
                     ),
@@ -67,7 +64,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: deepTeal,
+                        color: AppColors.primaryMaroon,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -76,7 +73,7 @@ class HomePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14.5,
-                        color: darkCharcoal,
+                        color: AppColors.darkCharcoal,
                         height: 1.4,
                       ),
                     ),
@@ -87,9 +84,9 @@ class HomePage extends StatelessWidget {
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF8FAFC),
+                        color: AppColors.warmWhite,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                        border: Border.all(color: AppColors.borderLight),
                       ),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +94,7 @@ class HomePage extends StatelessWidget {
                           Icon(
                             Icons.check_circle_outline_rounded,
                             size: 18,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           SizedBox(width: 8),
                           Flexible(
@@ -107,7 +104,7 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: deepTeal,
+                                color: AppColors.primaryMaroon,
                               ),
                             ),
                           ),
@@ -120,27 +117,27 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: deepTeal,
+                        color: AppColors.primaryMaroon,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Card(
                       elevation: 0,
-                      color: const Color(0xFFF8FAFC),
+                      color: AppColors.warmWhite,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(color: Color(0xFFE2E8F0)),
+                        side: const BorderSide(color: AppColors.borderLight),
                       ),
                       child: Column(
                         children: const [
                           ListTile(
                             leading: CircleAvatar(
                               radius: 18,
-                              backgroundColor: softMint,
+                              backgroundColor: AppColors.softBlush,
                               child: Icon(
                                 Icons.calculate,
                                 size: 20,
-                                color: deepTeal,
+                                color: AppColors.primaryMaroon,
                               ),
                             ),
                             title: Text(
@@ -148,22 +145,31 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14.5,
+                                color: AppColors.darkCharcoal,
                               ),
                             ),
                             subtitle: Text(
                               'Perform basic arithmetic operations.',
-                              style: TextStyle(fontSize: 12.5),
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: AppColors.mutedSlate,
+                              ),
                             ),
                           ),
-                          Divider(height: 1, indent: 16, endIndent: 16),
+                          Divider(
+                            height: 1,
+                            indent: 16,
+                            endIndent: 16,
+                            color: AppColors.borderLight,
+                          ),
                           ListTile(
                             leading: CircleAvatar(
                               radius: 18,
-                              backgroundColor: softMint,
+                              backgroundColor: AppColors.softBlush,
                               child: Icon(
                                 Icons.person,
                                 size: 20,
-                                color: deepTeal,
+                                color: AppColors.primaryMaroon,
                               ),
                             ),
                             title: Text(
@@ -171,22 +177,31 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14.5,
+                                color: AppColors.darkCharcoal,
                               ),
                             ),
                             subtitle: Text(
                               'View your student information.',
-                              style: TextStyle(fontSize: 12.5),
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: AppColors.mutedSlate,
+                              ),
                             ),
                           ),
-                          Divider(height: 1, indent: 16, endIndent: 16),
+                          Divider(
+                            height: 1,
+                            indent: 16,
+                            endIndent: 16,
+                            color: AppColors.borderLight,
+                          ),
                           ListTile(
                             leading: CircleAvatar(
                               radius: 18,
-                              backgroundColor: softMint,
+                              backgroundColor: AppColors.softBlush,
                               child: Icon(
                                 Icons.share,
                                 size: 20,
-                                color: deepTeal,
+                                color: AppColors.primaryMaroon,
                               ),
                             ),
                             title: Text(
@@ -194,24 +209,28 @@ class HomePage extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14.5,
+                                color: AppColors.darkCharcoal,
                               ),
                             ),
                             subtitle: Text(
                               'View your sample social accounts.',
-                              style: TextStyle(fontSize: 12.5),
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: AppColors.mutedSlate,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Divider(height: 1, color: Color(0xFFE2E8F0)),
+                    const Divider(height: 1, color: AppColors.borderLight),
                     const SizedBox(height: 14),
                     const Text(
                       'Earth Justin Lim · CCE106L (3447)',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: mutedSlate,
+                        color: AppColors.mutedSlate,
                         fontSize: 12.5,
                         fontWeight: FontWeight.w500,
                       ),

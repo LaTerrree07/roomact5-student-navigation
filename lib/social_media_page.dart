@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 class SocialMediaPage extends StatelessWidget {
   const SocialMediaPage({super.key});
 
@@ -11,11 +13,6 @@ class SocialMediaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const deepTeal = Color(0xFF0F766E);
-    const softMint = Color(0xFFCCFBF1);
-    const darkCharcoal = Color(0xFF1F2937);
-    const mutedSlate = Color(0xFF64748B);
-
     final accounts = [
       (
         platform: 'Facebook',
@@ -60,10 +57,14 @@ class SocialMediaPage extends StatelessWidget {
                   width: 64,
                   height: 64,
                   decoration: const BoxDecoration(
-                    color: softMint,
+                    color: AppColors.softBlush,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.share, size: 34, color: deepTeal),
+                  child: const Icon(
+                    Icons.share,
+                    size: 34,
+                    color: AppColors.primaryMaroon,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -73,14 +74,14 @@ class SocialMediaPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: darkCharcoal,
+                  color: AppColors.darkCharcoal,
                 ),
               ),
               const SizedBox(height: 4),
               const Text(
                 'Tap an account to display its username.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 13.5, color: mutedSlate),
+                style: TextStyle(fontSize: 13.5, color: AppColors.mutedSlate),
               ),
               const SizedBox(height: 16),
               for (final acc in accounts) ...[
@@ -90,7 +91,7 @@ class SocialMediaPage extends StatelessWidget {
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
-                    side: const BorderSide(color: Color(0xFFE2E8F0)),
+                    side: const BorderSide(color: AppColors.borderLight),
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
@@ -111,14 +112,14 @@ class SocialMediaPage extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 15,
-                        color: darkCharcoal,
+                        color: AppColors.darkCharcoal,
                       ),
                     ),
                     subtitle: Text(
                       acc.username,
                       style: const TextStyle(
                         fontSize: 13.5,
-                        color: mutedSlate,
+                        color: AppColors.mutedSlate,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

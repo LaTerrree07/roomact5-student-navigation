@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
 import 'demo_auth.dart';
 import 'main_screen.dart';
 import 'register_screen.dart';
@@ -45,10 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const deepTeal = Color(0xFF0F766E);
-    const softMint = Color(0xFFCCFBF1);
-    const mutedSlate = Color(0xFF64748B);
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -71,9 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
               constraints: const BoxConstraints(maxWidth: 440),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardWhite,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.04),
@@ -93,13 +90,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 72,
                           height: 72,
                           decoration: const BoxDecoration(
-                            color: softMint,
+                            color: AppColors.softBlush,
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
                             Icons.lock_person,
                             size: 40,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                         ),
                       ),
@@ -110,24 +107,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: deepTeal,
+                          color: AppColors.primaryMaroon,
                         ),
                       ),
                       const SizedBox(height: 6),
                       const Text(
                         'Sign in to your account with your credentials.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14, color: mutedSlate),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.mutedSlate,
+                        ),
                       ),
                       const SizedBox(height: 24),
                       TextFormField(
                         controller: usernameController,
+                        style: const TextStyle(color: AppColors.darkCharcoal),
                         decoration: InputDecoration(
                           labelText: 'Username',
                           hintText: 'Enter your username',
                           prefixIcon: const Icon(
                             Icons.person_outline,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -135,18 +136,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color(0xFFCBD5E1),
+                              color: AppColors.borderSubtle,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: deepTeal,
+                              color: AppColors.primaryMaroon,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF8FAFC),
+                          fillColor: AppColors.warmWhite,
                         ),
                         validator: (value) =>
                             value == null || value.trim().isEmpty
@@ -157,12 +158,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         controller: passwordController,
                         obscureText: hidePassword,
+                        style: const TextStyle(color: AppColors.darkCharcoal),
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter your password',
                           prefixIcon: const Icon(
                             Icons.lock_outline,
-                            color: deepTeal,
+                            color: AppColors.primaryMaroon,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -170,18 +172,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color(0xFFCBD5E1),
+                              color: AppColors.borderSubtle,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: deepTeal,
+                              color: AppColors.primaryMaroon,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF8FAFC),
+                          fillColor: AppColors.warmWhite,
                           suffixIcon: IconButton(
                             tooltip: hidePassword
                                 ? 'Show password'
@@ -190,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               hidePassword
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: mutedSlate,
+                              color: AppColors.mutedSlate,
                             ),
                             onPressed: () {
                               setState(() {
@@ -210,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: ElevatedButton(
                           onPressed: login,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: deepTeal,
+                            backgroundColor: AppColors.primaryMaroon,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -240,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             style: TextButton.styleFrom(
-                              foregroundColor: deepTeal,
+                              foregroundColor: AppColors.primaryMaroon,
                             ),
                             child: const Text(
                               "Don't have an account? Register",
@@ -250,13 +252,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       const SizedBox(height: 18),
-                      const Divider(height: 1, color: Color(0xFFE2E8F0)),
+                      const Divider(height: 1, color: AppColors.borderLight),
                       const SizedBox(height: 14),
                       const Text(
                         'Earth Justin Lim · CCE106L (3447)',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: mutedSlate,
+                          color: AppColors.mutedSlate,
                           fontSize: 12.5,
                           fontWeight: FontWeight.w500,
                         ),
