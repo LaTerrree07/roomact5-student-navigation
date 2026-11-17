@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
+import 'demo_auth.dart';
+import 'login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  void _logout(BuildContext context) {
+    DemoAuth.logout();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Profile')),
+      appBar: AppBar(
+        title: const Text('My Profile'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              icon: const Icon(Icons.logout_rounded),
+              tooltip: 'Log out',
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              onPressed: () => _logout(context),
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
@@ -113,14 +136,14 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ),
                         title: Text(
-                          'Year / Section',
+                          'Year / Code',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: AppColors.darkCharcoal,
                           ),
                         ),
                         subtitle: Text(
-                          '3rd Year — PS303',
+                          '3rd Year (3447)',
                           style: TextStyle(color: AppColors.mutedSlate),
                         ),
                       ),

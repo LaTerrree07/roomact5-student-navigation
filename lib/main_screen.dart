@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
 import 'calculator_screen.dart';
+import 'home_page.dart';
 import 'profile_page.dart';
-import 'social_media_page.dart';
+import 'social_media/social_media.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     HomePage(),
     CalculatorScreen(),
     ProfilePage(),
-    SocialMediaPage(),
+    SocialMediaScreen(),
   ];
 
   @override

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
+import 'demo_auth.dart';
+import 'login_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  void _logout(BuildContext context) {
+    DemoAuth.logout();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentUser = DemoAuth.currentUser ?? 'Student';
+
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -17,6 +29,13 @@ class HomePage extends StatelessWidget {
             Text('Home'),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Logout',
+            onPressed: () => _logout(context),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Center(
@@ -88,20 +107,20 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: AppColors.borderLight),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.check_circle_outline_rounded,
                             size: 18,
                             color: AppColors.primaryMaroon,
                           ),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Flexible(
                             child: Text(
-                              'Active Session · Student Portal',
+                              'Active Session · @$currentUser',
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.primaryMaroon,
@@ -213,7 +232,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             subtitle: Text(
-                              'View your sample social accounts.',
+                              'View student posts and social feed.',
                               style: TextStyle(
                                 fontSize: 12.5,
                                 color: AppColors.mutedSlate,
