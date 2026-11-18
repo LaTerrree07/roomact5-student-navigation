@@ -1,18 +1,24 @@
 class DemoAuth {
   static String? registeredUsername;
   static String? registeredPassword;
-  static String? currentUser;
+  static String? currentUsername;
+
+  static String? get currentUser => currentUsername;
+  static set currentUser(String? value) => currentUsername = value;
 
   static bool login(String username, String password) {
     final isAdmin = username == 'admin' && password == 'admin123';
-    final isRegistered =
+
+    final isRegisteredUser =
         registeredUsername != null &&
         username == registeredUsername &&
         password == registeredPassword;
-    if (isAdmin || isRegistered) {
-      currentUser = username;
+
+    if (isAdmin || isRegisteredUser) {
+      currentUsername = username;
       return true;
     }
+
     return false;
   }
 
@@ -22,6 +28,6 @@ class DemoAuth {
   }
 
   static void logout() {
-    currentUser = null;
+    currentUsername = null;
   }
 }

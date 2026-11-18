@@ -6,38 +6,44 @@ import 'create_post_sheet.dart';
 import 'post.dart';
 import 'post_card.dart';
 
-class SocialMediaScreen extends StatefulWidget {
-  const SocialMediaScreen({super.key});
+class SocialMediaPage extends StatefulWidget {
+  final String username;
+  final String? currentUsername;
+
+  const SocialMediaPage({
+    super.key,
+    this.username = 'Student',
+    this.currentUsername,
+  });
 
   @override
-  State<SocialMediaScreen> createState() => _SocialMediaScreenState();
+  State<SocialMediaPage> createState() => _SocialMediaPageState();
 }
 
-class _SocialMediaScreenState extends State<SocialMediaScreen> {
+typedef SocialMediaScreen = SocialMediaPage;
+
+class _SocialMediaPageState extends State<SocialMediaPage> {
   late final List<Post> _posts;
+
+  String get _effectiveUsername {
+    if (widget.currentUsername != null &&
+        widget.currentUsername!.trim().isNotEmpty) {
+      return widget.currentUsername!.trim();
+    }
+    if (widget.username.isNotEmpty && widget.username != 'Student') {
+      return widget.username;
+    }
+    final name = DemoAuth.currentUsername ?? DemoAuth.currentUser;
+    if (name != null && name.trim().isNotEmpty) {
+      return name.trim();
+    }
+    return widget.username;
+  }
 
   @override
   void initState() {
     super.initState();
     _posts = List<Post>.from(Post.samplePosts);
-  }
-
-  void _addPost(String caption, String imageUrl) {
-    final currentUsername = DemoAuth.currentUser ?? 'Student';
-    setState(() {
-      _posts.insert(
-        0,
-        Post(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          username: currentUsername,
-          imageUrl: imageUrl,
-          caption: caption,
-          likes: 0,
-          isLiked: false,
-          comments: [],
-        ),
-      );
-    });
   }
 
   void _toggleLike(int index) {
@@ -47,14 +53,31 @@ class _SocialMediaScreenState extends State<SocialMediaScreen> {
   }
 
   void _addComment(int index, String comment) {
-    final currentUsername = DemoAuth.currentUser ?? 'Student';
+    final currentUsername = _effectiveUsername;
     setState(() {
       _posts[index].addComment(currentUsername, comment);
     });
   }
 
-  void _openCreatePostSheet() {
-    CreatePostSheet.show(context, onPostCreated: _addPost);
+  Future<void> _openCreatePostSheet() async {
+    final currentUsername = _effectiveUsername;
+    final Post? newPost = await showModalBottomSheet<Post>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return CreatePostSheet(username: currentUsername);
+      },
+    );
+
+    if (!mounted || newPost == null) {
+      return;
+    }
+
+    setState(() {
+      _posts.insert(0, newPost);
+    });
   }
 
   @override
@@ -101,7 +124,7 @@ class _SocialMediaScreenState extends State<SocialMediaScreen> {
                   itemBuilder: (context, index) {
                     final post = _posts[index];
                     return PostCard(
-                      key: ValueKey(post.id),
+                      key: ObjectKey(post),
                       post: post,
                       onLikeToggle: () => _toggleLike(index),
                       onAddComment: (comment) => _addComment(index, comment),

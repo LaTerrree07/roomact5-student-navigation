@@ -5,9 +5,30 @@ import 'demo_auth.dart';
 import 'login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final String username;
+  final String? currentUsername;
 
-  void _logout(BuildContext context) {
+  const ProfilePage({
+    super.key,
+    this.username = 'Student',
+    this.currentUsername,
+  });
+
+  String get _effectiveUsername {
+    if (currentUsername != null && currentUsername!.trim().isNotEmpty) {
+      return currentUsername!.trim();
+    }
+    if (username.isNotEmpty && username != 'Student') {
+      return username;
+    }
+    final name = DemoAuth.currentUsername ?? DemoAuth.currentUser;
+    if (name != null && name.trim().isNotEmpty) {
+      return name.trim();
+    }
+    return username;
+  }
+
+  void logout(BuildContext context) {
     DemoAuth.logout();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (_) => const LoginScreen()),
@@ -17,21 +38,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final effectiveUsername = _effectiveUsername;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Profile'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: IconButton(
-              icon: const Icon(Icons.logout_rounded),
-              tooltip: 'Log out',
-              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-              onPressed: () => _logout(context),
-            ),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('Student Profile')),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
@@ -78,6 +88,39 @@ class ProfilePage extends StatelessWidget {
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: AppColors.mutedSlate,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.softBlush,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppColors.softBlushBorder),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.account_circle_outlined,
+                        size: 16,
+                        color: AppColors.primaryMaroon,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Logged in as: $effectiveUsername',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primaryMaroon,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 28),
@@ -288,6 +331,24 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton.icon(
+                  onPressed: () => logout(context),
+                  icon: const Icon(Icons.logout),
+                  label: const Text('Logout'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryMaroon,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 1,
+                  ),
+                ),
               ),
             ],
           ),

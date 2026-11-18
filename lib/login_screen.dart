@@ -27,9 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (valid) {
-      Navigator.of(
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Invalid username or password.')),
@@ -233,6 +233,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: WrapAlignment.center,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
+                          const Text(
+                            "Don't have an account? ",
+                            style: TextStyle(
+                              color: AppColors.mutedSlate,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).push(
@@ -243,10 +251,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: AppColors.primaryMaroon,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(48, 44),
+                              tapTargetSize: MaterialTapTargetSize.padded,
                             ),
                             child: const Text(
-                              "Don't have an account? Register",
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              'Register',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],

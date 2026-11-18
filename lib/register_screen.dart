@@ -261,14 +261,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         alignment: WrapAlignment.center,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
+                          const Text(
+                            'Already have an account? ',
+                            style: TextStyle(
+                              color: AppColors.mutedSlate,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             style: TextButton.styleFrom(
                               foregroundColor: AppColors.primaryMaroon,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(48, 44),
+                              tapTargetSize: MaterialTapTargetSize.padded,
                             ),
                             child: const Text(
-                              'Already have an account? Login',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],

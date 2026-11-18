@@ -2,21 +2,36 @@ import 'package:flutter/material.dart';
 
 import '../app_theme.dart';
 import '../demo_auth.dart';
+import 'post.dart';
 
 class CreatePostSheet extends StatefulWidget {
-  final void Function(String caption, String imageUrl) onPostCreated;
+  final String username;
+  final String? currentUsername;
+  final void Function(String caption, String imageUrl)? onPostCreated;
 
-  const CreatePostSheet({super.key, required this.onPostCreated});
+  const CreatePostSheet({
+    super.key,
+    this.username = 'Student',
+    this.currentUsername,
+    this.onPostCreated,
+  });
 
-  static Future<void> show(
+  static Future<Post?> show(
     BuildContext context, {
-    required void Function(String caption, String imageUrl) onPostCreated,
+    String? currentUsername,
+    String? username,
+    void Function(String caption, String imageUrl)? onPostCreated,
   }) {
-    return showModalBottomSheet(
+    return showModalBottomSheet<Post>(
       context: context,
       isScrollControlled: true,
+      useSafeArea: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => CreatePostSheet(onPostCreated: onPostCreated),
+      builder: (_) => CreatePostSheet(
+        currentUsername: currentUsername,
+        username: username ?? 'Student',
+        onPostCreated: onPostCreated,
+      ),
     );
   }
 
@@ -41,15 +56,38 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
 
     final caption = _captionController.text.trim();
     final imageUrl = _imageUrlController.text.trim();
+    final currentUser =
+        widget.currentUsername ??
+        (widget.username != 'Student'
+            ? widget.username
+            : (DemoAuth.currentUsername ??
+                  DemoAuth.currentUser ??
+                  widget.username));
 
-    widget.onPostCreated(caption, imageUrl);
-    Navigator.of(context).pop();
+    final newPost = Post(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      username: currentUser,
+      imageUrl: imageUrl,
+      caption: caption,
+      likes: 0,
+      isLiked: false,
+      comments: [],
+    );
+
+    widget.onPostCreated?.call(caption, imageUrl);
+    Navigator.of(context).pop(newPost);
   }
 
   @override
   Widget build(BuildContext context) {
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-    final currentUser = DemoAuth.currentUser ?? 'Student';
+    final currentUser =
+        widget.currentUsername ??
+        (widget.username != 'Student'
+            ? widget.username
+            : (DemoAuth.currentUsername ??
+                  DemoAuth.currentUser ??
+                  widget.username));
 
     return Container(
       decoration: const BoxDecoration(
@@ -120,10 +158,9 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
               TextFormField(
                 key: const Key('post_image_url_field'),
                 controller: _imageUrlController,
-                style: const TextStyle(color: AppColors.darkCharcoal),
                 decoration: InputDecoration(
                   labelText: 'Image URL',
-                  hintText: 'https://picsum.photos/id/40/600/400',
+                  hintText: 'https://images.unsplash.com/...',
                   prefixIcon: const Icon(
                     Icons.image_outlined,
                     color: AppColors.primaryMaroon,
@@ -145,17 +182,16 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
                   filled: true,
                   fillColor: AppColors.warmWhite,
                 ),
-                validator: (value) {
-                  final trimmed = value?.trim() ?? '';
-                  if (trimmed.isEmpty) {
+                validator: (val) {
+                  final text = val?.trim() ?? '';
+                  if (text.isEmpty) {
                     return 'Please enter an image URL.';
                   }
-                  final uri = Uri.tryParse(trimmed);
+                  final uri = Uri.tryParse(text);
                   final isHttp =
                       uri != null &&
-                      (uri.scheme == 'http' || uri.scheme == 'https') &&
-                      uri.hasAuthority;
-                  if (!isHttp) {
+                      (uri.scheme == 'http' || uri.scheme == 'https');
+                  if (!isHttp || !uri.hasAuthority) {
                     return 'Please enter a valid HTTP/HTTPS image URL.';
                   }
                   return null;
@@ -166,18 +202,10 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
                 key: const Key('post_caption_field'),
                 controller: _captionController,
                 maxLines: 3,
-                style: const TextStyle(color: AppColors.darkCharcoal),
                 decoration: InputDecoration(
                   labelText: 'Caption',
-                  hintText: "What's on your mind?",
+                  hintText: 'Write something about this post...',
                   alignLabelWithHint: true,
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.only(bottom: 40),
-                    child: Icon(
-                      Icons.edit_note,
-                      color: AppColors.primaryMaroon,
-                    ),
-                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -195,8 +223,8 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
                   filled: true,
                   fillColor: AppColors.warmWhite,
                 ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
+                validator: (val) {
+                  if (val == null || val.trim().isEmpty) {
                     return 'Please enter a caption.';
                   }
                   return null;
@@ -206,10 +234,7 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
               ElevatedButton.icon(
                 onPressed: _submit,
                 icon: const Icon(Icons.send_rounded, size: 18),
-                label: const Text(
-                  'Share Post',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+                label: const Text('Share Post'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryMaroon,
                   foregroundColor: Colors.white,
@@ -217,7 +242,6 @@ class _CreatePostSheetState extends State<CreatePostSheet> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  elevation: 1,
                 ),
               ),
             ],
