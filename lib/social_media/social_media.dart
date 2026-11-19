@@ -20,8 +20,6 @@ class SocialMediaPage extends StatefulWidget {
   State<SocialMediaPage> createState() => _SocialMediaPageState();
 }
 
-typedef SocialMediaScreen = SocialMediaPage;
-
 class _SocialMediaPageState extends State<SocialMediaPage> {
   late final List<Post> _posts;
 

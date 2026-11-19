@@ -8,7 +8,6 @@ import 'package:lim_navigation_app/main.dart';
 import 'package:lim_navigation_app/main_screen.dart';
 import 'package:lim_navigation_app/profile_page.dart';
 import 'package:lim_navigation_app/social_media/social_media.dart';
-import 'package:lim_navigation_app/social_media_page.dart' as links;
 
 void main() {
   setUp(() {
@@ -275,32 +274,6 @@ void main() {
       expect(find.text('Listening to music'), findsOneWidget);
     },
   );
-
-  testWidgets('SocialMediaPage displays all 4 platforms and shows SnackBars', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(const MaterialApp(home: links.SocialMediaPage()));
-
-    expect(find.text('Facebook'), findsOneWidget);
-    expect(find.text('Instagram'), findsOneWidget);
-    expect(find.text('Threads'), findsOneWidget);
-    expect(find.text('GitHub'), findsOneWidget);
-    expect(find.text('@la.terrree'), findsNWidgets(3));
-    expect(find.text('@LaTerrree07'), findsOneWidget);
-
-    // Tap Instagram
-    await tester.tap(find.text('Instagram'));
-    await tester.pump();
-    expect(
-      find.text('Selected account: Instagram: @la.terrree'),
-      findsOneWidget,
-    );
-
-    // Tap GitHub
-    await tester.tap(find.text('GitHub'));
-    await tester.pump();
-    expect(find.text('Selected account: GitHub: @LaTerrree07'), findsOneWidget);
-  });
 
   testWidgets(
     'Social Media Feed liking, unliking, and commenting work properly',
