@@ -47,19 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.school_rounded, color: Colors.white, size: 24),
-            SizedBox(width: 10),
-            Text(
-              'Student Portal',
-              style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 0.5),
-            ),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: const Text('Login Page')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
